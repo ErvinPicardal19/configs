@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ -z "$(command -v tmux)" ]; then
+    echo "ERROR: tmux is not installed." 1>&2
+    return 1
+fi
+
+if [[ $TMUX == "" ]]; then
+    tmux attach -t default || tmux new-session -s default
+fi

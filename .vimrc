@@ -107,3 +107,6 @@ nnoremap <leader>W :split<cr>
 " move selected line up
 vnoremap <C-j> dpV
 vnoremap <C-k> dkPV
+
+" Open bottom terminal
+nnoremap <C-\> :term<CR><C-w>w:set winheight=38<CR><C-w>w

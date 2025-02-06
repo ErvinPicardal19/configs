@@ -176,6 +176,10 @@ nnoremap <silent> <leader>[ :tabp<cr>
 nnoremap <leader>w :vsplit<cr>
 nnoremap <leader>W :split<cr>
 
+" Autocomment
+vnoremap <leader>c <c-v>^I//<Esc>
+vnoremap <leader>c <c-v>^o^lx
+
 " move selected line up
 vnoremap <C-j> dpV
 vnoremap <C-k> dkPV

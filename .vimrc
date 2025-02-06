@@ -25,6 +25,7 @@ call plug#end()
 " vim-gutentags
 let g:gutentags_enabled = 1
 let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_ctags_extra_args = ['--languages=C']
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1

@@ -18,8 +18,16 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 Plug 'dense-analysis/ale'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
+
+" vim-gutentags
+let g:gutentags_enabled = 1
+let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
 
 " Enable ALE
 let g:ale_enable = 1
@@ -29,6 +37,9 @@ let g:ale_linters = {
 \   'c': ['clang', 'clang-tidy-18', 'gcc'],
 \   'make': ['make'],
 \}
+
+let g:ale_c_clang_options = '-I/usr/include -I/usr/local/include'
+let g:ale_c_gcc_options = '-I/usr/include -I/usr/local/include'
 
 " Enable real-time linting (optional)
 let g:ale_lint_on_text_changed = 'always'

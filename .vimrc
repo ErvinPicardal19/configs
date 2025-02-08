@@ -19,16 +19,21 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'github/copilot.vim'
+Plug 'nordtheme/vim'
 
 call plug#end()
 
 " vim-gutentags
+let g:gutentags_add_default_project_roots = 1
+let g:gutentags_project_root = ['src']
 let g:gutentags_enabled = 1
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_ctags_extra_args = ['--languages=C']
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_save = 1
 
 " Enable ALE
 let g:ale_enable = 1
@@ -39,8 +44,12 @@ let g:ale_linters = {
 \   'make': ['make'],
 \}
 
-let g:ale_c_clang_options = '-I/usr/include -I/usr/local/include'
-let g:ale_c_gcc_options = '-I/usr/include -I/usr/local/include'
+let g:ale_c_clang_options = '-I/usr/include -I/usr/local/include -I./include'
+let g:ale_c_gcc_options = '-I/usr/include -I/usr/local/include -I./include'
+
+let g:ale_pattern_options = {
+\   '.*No such file or directory.*': {'ale_enabled': 0}
+\}
 
 " Enable real-time linting (optional)
 let g:ale_lint_on_text_changed = 'always'
@@ -56,7 +65,7 @@ let g:ale_echo_msg_warning_str = 'Warning: '
 let g:ale_sign_column_always = 1
 
 " Optional: Set make to run with the -n option to simulate a dry run
-let g:ale_makeprg = 'make -n'
+" let g:ale_makeprg = 'make -n'
 
 " To see the linting messages, you can use :ALEDetail or :ALELint.
 " You can trigger linting with :ALELint, show errors with :ALEDetail, and navigate through errors with :ALENext or :ALEPrevious.
@@ -90,10 +99,19 @@ set splitbelow
 
 " Enable relative numbers and colorscheme
 set relativenumber
-colorscheme habamax
+colorscheme industry
 
 " Enable status bar
-set laststatus=2
+" set statusline=
+" set statusline+=%y\       " File Type
+" set statusline+=%F\       " Full File Path
+" set statusline+=%m\       " [+] if modified
+" set statusline+=%r\       " [RO] if read-only
+" set statusline+=%=        " Right align the next items
+" set statusline+=%{gutentags#statusline()} " Gutentags Status
+" set statusline+=\ %c,%l/%L " Cursor Position: column, line/total lines
+
+set laststatus=2 " Always show statusline
 
 " FINDING FILES:
 
@@ -172,6 +190,16 @@ nnoremap <leader>p :bp<CR>
 nnoremap <leader>t :tabnew<CR>
 nnoremap <silent> <leader>] :tabn<CR>
 nnoremap <silent> <leader>[ :tabp<cr>
+
+nnoremap <leader>1 1gt
+nnoremap <leader>2 2gt
+nnoremap <leader>3 3gt
+nnoremap <leader>4 4gt
+nnoremap <leader>5 5gt
+nnoremap <leader>6 6gt
+nnoremap <leader>7 7gt
+nnoremap <leader>8 8gt
+nnoremap <leader>9 9gt
 
 " vsplit
 nnoremap <leader>w :vsplit<cr>

@@ -29,7 +29,7 @@ let g:gutentags_add_default_project_roots = 1
 let g:gutentags_project_root = ['src']
 let g:gutentags_enabled = 1
 let g:gutentags_ctags_tagfile = '.tags'
-let g:gutentags_ctags_extra_args = ['--languages=C']
+let g:gutentags_ctags_extra_args = ['--recurse=yes', '--languages=C,C++,Make', '--c-kinds=+p', '--c++-kinds=+p']
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
@@ -132,7 +132,9 @@ set wildmenu
 " TAG JUMPING:
 
 " Create the 'tags' file (may need to install ctags first)
-command! MakeTags !ctags -R --languages=C,C++,Make --c-kinds=+p --make-kinds=+p -f tags . /usr/include /usr/local/include
+command! MakeTags !ctags -R --languages=C,C++,Make --C-kinds=+p --C++-kinds=+p -f ~/.vim/tags /usr/include /usr/local/include
+
+set tags+=~/.vim/tags
 
 " NOW WE CAN:
 " - Use ^] to jump to tag under cursor

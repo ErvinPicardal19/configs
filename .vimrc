@@ -158,6 +158,10 @@ let g:netrw_liststyle=3		" tree view
 " - <CR>/v/t to open in an h-split/v-split/tab
 " - check |netrw-browse-maps| for more mappings
 
+" Show tabs as »
+set list
+set listchars=tab:»\ ,trail:·
+
 " MAPPINGS:
 let mapleader = "\<Space>"
 " Reload .vimrc

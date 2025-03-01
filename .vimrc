@@ -22,6 +22,8 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-latex/vim-latex'
 Plug 'github/copilot.vim'
 Plug 'nordtheme/vim'
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 call plug#end()
 
@@ -71,6 +73,20 @@ let g:ale_sign_column_always = 1
 " To see the linting messages, you can use :ALEDetail or :ALELint.
 " You can trigger linting with :ALELint, show errors with :ALEDetail, and navigate through errors with :ALENext or :ALEPrevious.
 
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+let g:livepreview_previewer = 'python3'
+let g:livepreview_previewer = 'evince'
+let g:livepreview_cursorhold_recompile = 0
+let g:Imap_UsePlaceHolders = 0
+let g:livepreview_use_biber = 1
+
 " ----------------------- BASIC NATIVE VIM SETUP -----------------------
 
 " Allow backspace
@@ -95,8 +111,8 @@ set splitright
 set splitbelow
 
 " Enable syntax and plugins (for netrw)
-" syntax enable
-" filetype plugin on
+syntax enable
+filetype plugin on
 
 " Enable relative numbers and colorscheme
 set relativenumber

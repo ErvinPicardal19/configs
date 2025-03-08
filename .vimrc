@@ -20,6 +20,7 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-latex/vim-latex'
+Plug 'tpope/vim-sleuth'
 Plug 'github/copilot.vim'
 Plug 'nordtheme/vim'
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
@@ -84,8 +85,8 @@ let g:tex_flavor='latex'
 let g:livepreview_previewer = 'python3'
 let g:livepreview_previewer = 'evince'
 let g:livepreview_cursorhold_recompile = 0
-let g:Imap_UsePlaceHolders = 0
 let g:livepreview_use_biber = 1
+let g:Imap_UsePlaceHolders = 0
 
 " ----------------------- BASIC NATIVE VIM SETUP -----------------------
 
@@ -98,12 +99,12 @@ set nocompatible
 set encoding=utf-8
 
 " Set tab size to 4 spaces
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
 " Convert tabs to spaces
-set expandtab
-set autoindent
+" set expandtab
+" set autoindent
 set fileformat=unix
 
 " Set split to the right and below

@@ -99,11 +99,12 @@ set nocompatible
 set encoding=utf-8
 
 " Set tab size to 4 spaces
-" set tabstop=4
+ set tabstop=4
 " set softtabstop=4
 " set shiftwidth=4
 " Convert tabs to spaces
 " set expandtab
+set noexpandtab
 " set autoindent
 set fileformat=unix
 

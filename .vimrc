@@ -1,5 +1,4 @@
 " BASIC SETUP:
-
 set noro
 set modifiable
 
@@ -22,9 +21,11 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-latex/vim-latex'
 Plug 'tpope/vim-sleuth'
 Plug 'github/copilot.vim'
-Plug 'nordtheme/vim'
+Plug 'nvim-lua/plenary.nvim'
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -87,6 +88,9 @@ let g:livepreview_previewer = 'evince'
 let g:livepreview_cursorhold_recompile = 0
 let g:livepreview_use_biber = 1
 let g:Imap_UsePlaceHolders = 0
+
+" Initialize configuration dictionary
+let g:fzf_vim = {}
 
 " ----------------------- BASIC NATIVE VIM SETUP -----------------------
 
@@ -214,7 +218,7 @@ nnoremap <leader>p :bp<CR>
 " Create new tab
 nnoremap <leader>t :tabnew<CR>
 nnoremap <silent> <leader>] :tabn<CR>
-nnoremap <silent> <leader>[ :tabp<cr>
+nnoremap <silent> <leader>[ :tabp<CR>
 
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -241,3 +245,6 @@ vnoremap <C-k> dkPV
 " Open bottom terminal
 nnoremap <C-\> :term<CR><C-w>w:set winheight=38<CR><C-w>w
 
+" Harpoon
+nnoremap <leader>h :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>H :lua require("harpoon.ui").toggle_quick_menu()<CR>

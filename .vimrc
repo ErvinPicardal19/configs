@@ -27,7 +27,7 @@ call plug#end()
 " vim-gutentags
 let g:gutentags_add_default_project_roots = 1
 let g:gutentags_project_root = ['src']
-let g:gutentags_enabled = 1
+let g:gutentags_enabled = 0
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_ctags_extra_args = ['--recurse=yes', '--languages=C,C++,Make', '--c-kinds=+p', '--c++-kinds=+p']
 let g:gutentags_generate_on_new = 1
@@ -214,6 +214,11 @@ nnoremap <leader>W :split<cr>
 " Autocomment
 vnoremap <leader>c <c-v>^I//<Esc>
 vnoremap <leader>C <c-v>^o^lx
+
+" Wrap
+vnoremap " da""<Esc>P
+vnoremap { da{}<Esc>P
+vnoremap [ da[]<Esc>P
 
 " move selected line up
 vnoremap <C-j> dpV

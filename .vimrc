@@ -1,5 +1,4 @@
 " BASIC SETUP:
-
 set noro
 set modifiable
 
@@ -19,8 +18,14 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 
 Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
+Plug 'vim-latex/vim-latex'
+Plug 'tpope/vim-sleuth'
 Plug 'github/copilot.vim'
-Plug 'nordtheme/vim'
+Plug 'nvim-lua/plenary.nvim'
+" A Vim Plugin for Lively Previewing LaTeX PDF Output
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -70,6 +75,23 @@ let g:ale_sign_column_always = 1
 " To see the linting messages, you can use :ALEDetail or :ALELint.
 " You can trigger linting with :ALELint, show errors with :ALEDetail, and navigate through errors with :ALENext or :ALEPrevious.
 
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+let g:livepreview_previewer = 'python3'
+let g:livepreview_previewer = 'evince'
+let g:livepreview_cursorhold_recompile = 0
+let g:livepreview_use_biber = 1
+let g:Imap_UsePlaceHolders = 0
+
+" Initialize configuration dictionary
+let g:fzf_vim = {}
+
 " ----------------------- BASIC NATIVE VIM SETUP -----------------------
 
 " Allow backspace
@@ -86,6 +108,7 @@ set softtabstop=4
 set shiftwidth=4
 " Convert tabs to spaces
 set expandtab
+" set noexpandtab
 set autoindent
 set fileformat=unix
 
@@ -94,8 +117,8 @@ set splitright
 set splitbelow
 
 " Enable syntax and plugins (for netrw)
-" syntax enable
-" filetype plugin on
+syntax enable
+filetype plugin on
 
 " Enable relative numbers and colorscheme
 set relativenumber
@@ -195,7 +218,7 @@ nnoremap <leader>p :bp<CR>
 " Create new tab
 nnoremap <leader>t :tabnew<CR>
 nnoremap <silent> <leader>] :tabn<CR>
-nnoremap <silent> <leader>[ :tabp<cr>
+nnoremap <silent> <leader>[ :tabp<CR>
 
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
@@ -227,3 +250,6 @@ vnoremap <C-k> dkPV
 " Open bottom terminal
 nnoremap <C-\> :term<CR><C-w>w:set winheight=38<CR><C-w>w
 
+" Harpoon
+nnoremap <leader>h :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>H :lua require("harpoon.ui").toggle_quick_menu()<CR>

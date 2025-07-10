@@ -239,9 +239,10 @@ vnoremap <leader>c <c-v>^I//<Esc>
 vnoremap <leader>C <c-v>^o^lx
 
 " Wrap
-vnoremap " da""<Esc>P
-vnoremap { da{}<Esc>P
-vnoremap [ da[]<Esc>P
+vnoremap " s""<Esc>P
+vnoremap { s{}<Esc>P
+vnoremap [ s[]<Esc>P
+vnoremap ( s()<Esc>P
 
 " move selected line up
 vnoremap <C-j> dpV
@@ -253,3 +254,7 @@ nnoremap <C-\> :term<CR><C-w>w:set winheight=38<CR><C-w>w
 " Harpoon
 nnoremap <leader>h :lua require("harpoon.mark").add_file()<CR>
 nnoremap <leader>H :lua require("harpoon.ui").toggle_quick_menu()<CR>
+
+" FZF
+nnoremap <leader>f :BLines<CR>
+nnoremap <leader>F :Files<CR>

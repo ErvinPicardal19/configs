@@ -155,7 +155,7 @@ set wildmenu
 " TAG JUMPING:
 
 " Create the 'tags' file (may need to install ctags first)
-command! MakeTags !ctags -R --languages=C,C++,Make --C-kinds=+p --C++-kinds=+p -f ~/.vim/tags /usr/include /usr/local/include
+command! MakeTags !ctags -R --languages=C,C++,Make --C-kinds=+p --C++-kinds=+p -f ~/.vim/tags /usr/include /usr/local/include .
 
 set tags+=~/.vim/tags
 

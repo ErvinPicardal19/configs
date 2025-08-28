@@ -2,6 +2,29 @@
 set noro
 set modifiable
 
+function! FindProjectRoot()
+  " Prefer current buffer's dir, otherwise fallback to cwd
+  let l:startdir = expand('%:p:h')
+  if empty(l:startdir)
+    let l:startdir = getcwd()
+  endif
+
+  " If .project_root exists right here
+  if filereadable(fnamemodify(l:startdir, ':p') . '/.project_root')
+    return fnamemodify(l:startdir, ':p')
+  endif
+
+  " Otherwise look upwards for .project_root
+  let l:root = findfile('.project_root', l:startdir . ';')
+  if empty(l:root)
+    return fnamemodify(l:startdir, ':p')
+  endif
+
+  return fnamemodify(l:root, ':p:h')
+endfunction
+
+let g:project_root = FindProjectRoot()
+
 " Plugins
 call plug#begin("~/.vim/plugged")
 
@@ -43,18 +66,25 @@ let g:gutentags_generate_on_save = 1
 " Enable ALE
 let g:ale_enable = 1
 
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+
 " Enable specific linters (optional)
 let g:ale_linters = {
-\   'c': ['clang', 'clang-tidy-18', 'gcc'],
-\   'make': ['make'],
+\   'c': ['gcc', 'clang']
 \}
 
-let g:ale_c_clang_options = '-I/usr/include -I/usr/local/include -I./include'
-let g:ale_c_gcc_options = '-I/usr/include -I/usr/local/include -I./include'
+" Function to build recursive -I flags from a given root directory
+function! BuildIncludeFlags(root) abort
+  let l:includes = systemlist('find ' . shellescape(a:root) . ' -type d')
+  return join(map(l:includes, {_, val -> '-I' . val}), ' ')
+endfunction
 
-let g:ale_pattern_options = {
-\   '.*No such file or directory.*': {'ale_enabled': 0}
-\}
+let g:cflags = '-I/usr/include -I/usr/local/include ' .
+      \ BuildIncludeFlags(g:project_root . 'include')
+
+let g:ale_c_gcc_options = g:cflags
+let g:ale_c_clang_options = g:cflags
 
 " Enable real-time linting (optional)
 let g:ale_lint_on_text_changed = 'always'
@@ -109,8 +139,8 @@ set shiftwidth=4
 " Convert tabs to spaces
 set expandtab
 " set noexpandtab
-set autoindent
-set fileformat=unix
+" set autoindent
+" set fileformat=unix
 
 " Set split to the right and below
 set splitright
@@ -155,9 +185,13 @@ set wildmenu
 " TAG JUMPING:
 
 " Create the 'tags' file (may need to install ctags first)
-command! MakeTags !ctags -R --languages=C,C++,Make --C-kinds=+p --C++-kinds=+p -f tags /usr/include /usr/local/include .
+command! MakeTags execute '!ctags -R --links=yes ' .
+      \ '--languages=C,C++,Make --c-kinds=+p --C++-kinds=+p --fields=+iaS --extras=+q ' .
+      \ '-I __attribute__ -I __inline__ -I __asm__ -I __volative__ -I restrict ' .
+      \ '-f ' . g:project_root . 'tags /usr/include /usr/local/include .'
 
-set tags+=~/.vim/tags
+
+execute 'set tags+=' . fnameescape(g:project_root . '/tags')
 
 " NOW WE CAN:
 " - Use ^] to jump to tag under cursor
@@ -177,6 +211,11 @@ set completeopt=menuone,noinsert,noselect
 
 " Enable completion from other open buffers
 set complete+=k
+
+" Tell Vim to use ALE for omni completion
+" set omnifunc=ale#completion#OmniFunc
+" For C/C++
+set omnifunc=ccomplete#Complete
 
 " HIGHLIGHTS:
 " - ^x^n for JUST this file

@@ -64,14 +64,17 @@ let g:gutentags_generate_on_write = 1
 let g:gutentags_generate_on_save = 1
 
 " Enable ALE
-let g:ale_enable = 1
+let g:ale_enabled = 1
 
 let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
+
+let g:ale_pattern_options = {
+      \ '.*': {'ale_lint_cwd': 'project'},
+      \}
 
 " Enable specific linters (optional)
 let g:ale_linters = {
-\   'c': ['gcc', 'clang']
+\   'c': ['gcc'],
 \}
 
 " Function to build recursive -I flags from a given root directory
@@ -80,16 +83,15 @@ function! BuildIncludeFlags(root) abort
   return join(map(l:includes, {_, val -> '-I' . val}), ' ')
 endfunction
 
-let g:cflags = '-I/usr/include -I/usr/local/include ' .
-      \ BuildIncludeFlags(g:project_root . 'include')
+let g:cflags = '-Wall -Wextra -I/usr/include -I/usr/local/include '
+let g:cflags .= '-I' . getcwd() . '/include'
 
-let g:ale_c_gcc_options = g:cflags
-let g:ale_c_clang_options = g:cflags
+let g:ale_c_cc_options = g:cflags
 
 " Enable real-time linting (optional)
-let g:ale_lint_on_text_changed = 'always'
+" let g:ale_lint_on_text_changed = 'always'
 " Enable automatic linting when the file is saved
-let g:ale_lint_on_save = 1
+" let g:ale_lint_on_save = 1
 
 " Display error messages in a popup or the status line
 let g:ale_echo_err = 1
@@ -185,13 +187,11 @@ set wildmenu
 " TAG JUMPING:
 
 " Create the 'tags' file (may need to install ctags first)
-command! MakeTags execute '!ctags -R --links=yes ' .
-      \ '--languages=C,C++,Make --c-kinds=+p --C++-kinds=+p --fields=+iaS --extras=+q ' .
-      \ '-I __attribute__ -I __inline__ -I __asm__ -I __volative__ -I restrict ' .
+command! MakeTags execute '!ctags -R --links=yes --languages=C,C++,Make --c-kinds=+p --C++-kinds=+p --fields=+iaS --extras=+q ' . '-I __attribute__ -I __inline__ -I __asm__ -I __volative__ -I restrict ' .
       \ '-f ' . g:project_root . 'tags /usr/include /usr/local/include .'
 
 
-execute 'set tags+=' . fnameescape(g:project_root . '/tags')
+execute 'set tags+=' . fnameescape(g:project_root . 'tags')
 
 " NOW WE CAN:
 " - Use ^] to jump to tag under cursor
@@ -213,9 +213,9 @@ set completeopt=menuone,noinsert,noselect
 set complete+=k
 
 " Tell Vim to use ALE for omni completion
-" set omnifunc=ale#completion#OmniFunc
+set omnifunc=ale#completion#OmniFunc
 " For C/C++
-set omnifunc=ccomplete#Complete
+" set omnifunc=ccomplete#Complete
 
 " HIGHLIGHTS:
 " - ^x^n for JUST this file
@@ -296,4 +296,13 @@ nnoremap <leader>H :lua require("harpoon.ui").toggle_quick_menu()<CR>
 
 " FZF
 nnoremap <leader>f :BLines<CR>
+nnoremap <leader>r :Rg<CR>
 nnoremap <leader>F :Files<CR>
+nnoremap <leader>g :BCommits<CR>
+nnoremap <leader>G :Commits<CR>
+
+" Completion
+" pumvisible() returns 1 (true) if the popup menu (the completion menu that drops down with suggestions) is currently visible.
+inoremap <C-n> <>
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-x><C-o>'
+inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-x><C-o>'

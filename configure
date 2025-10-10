@@ -12,7 +12,7 @@ if [ ${#} -gt 0 ]; then
 fi
 
 if [ -z "$(command -v tmux)" ]; then
-    echo "ERROR: tmux is not installed." 1>&2
+    echo -e "\033[33mWARN\033[0m: tmux is not installed." 1>&2
     exit 1
 fi
 

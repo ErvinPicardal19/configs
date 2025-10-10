@@ -3,5 +3,4 @@ function! BuildIncludeFlags(root) abort
     return join(map(l:includes, {_, val -> '-I' . val}), ' ')
 endfunction
 
-let g:ale_c_cc_options = '-Wall -Wextra -I/usr/include -I/usr/local/include '
-let g:ale_c_cc_options .= '-I' . BuildIncludeFlags(getcwd())
+let g:ale_c_cc_options .= BuildIncludeFlags(getcwd())

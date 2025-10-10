@@ -78,6 +78,7 @@ let g:ale_linters = {
 \}
 
 " Function to build recursive -I flags from a given root directory
+let g:ale_c_cc_options = '-Wall -Wextra -I/usr/include -I/usr/local/include '
 let g:curdir = findfile('ale_completion.vim', g:project_root . ';')
 if !empty(g:curdir)
   execute 'source ' . g:project_root . '/ale_completion.vim'

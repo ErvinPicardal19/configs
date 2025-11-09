@@ -16,8 +16,8 @@ if [ -z "$(command -v tmux)" ]; then
     exit 1
 fi
 
-ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf
-ln -s "$(pwd)/.vimrc" ~/.vimrc
+ln -s "$(pwd)/.tmux.conf" ~/.tmux.conf 2>/dev/null
+ln -s "$(pwd)/.vimrc" ~/.vimrc 2>/dev/null
 if [ $NVIM -eq 1 ]; then
-    ln -s "$(pwd)/nvim" ~/.config/nvim
+    ln -s "$(pwd)/nvim" ~/.config/nvim 2>/dev/null
 fi

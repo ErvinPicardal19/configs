@@ -241,6 +241,9 @@ let g:netrw_liststyle=3		" tree view
 set list
 set listchars=tab:»\ ,trail:·
 
+" PASTE TOGGLE:
+" set pastetoggle=<F2>
+
 " MAPPINGS:
 let mapleader = "\<Space>"
 " Reload .vimrc

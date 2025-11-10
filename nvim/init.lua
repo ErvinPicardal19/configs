@@ -1,8 +1,4 @@
 vim.g.loaded_osc52 = 1  -- disable osc52 before packer loads plugins
-require('packer').startup(function()
-  use 'ojroques/nvim-osc52'
-  -- other plugins
-end)
 
 -- Set <space> as the leader key
 -- See `:help mapleader`

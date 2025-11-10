@@ -1,6 +1,9 @@
-vim.cmd('let g:netrw_banner=0')
-vim.cmd('let g:netrw_liststyle=3')
-
+-- Ensure reuse of the same window
+vim.g.netrw_browse_split = 0
+vim.o.hidden = true
+vim.g.netrw_liststyle = 3
+vim.g.netrw_banner = 0
+vim.g.netrw_keepdir = 0
 
 -- Enable syntax and plugins (for netrw)
 vim.cmd('syntax enable')
@@ -32,9 +35,11 @@ local function toggle_filetree()
 end
 
 local function netrw_openfile()
-      local filename = vim.fn.expand('<cfile>')
+      local filename = vim.fn.expand('<cfile>:p')
       local win_count = #vim.api.nvim_tabpage_list_wins(0)
       local filetype = vim.bo.filetype
+
+      print("filename: ", filename)
 
       if win_count == 1 and filetype == 'netrw' then
           vim.cmd('botright vsplit ' .. vim.fn.fnameescape(filename))
@@ -59,7 +64,6 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "netrw",
 	callback = function()
-		vim.keymap.set("n", "<CR>", netrw_openfile, { buffer = true })
+		vim.keymap.set("n", "o", netrw_openfile, { buffer = true, noremap = true })
 	end,
 })
-

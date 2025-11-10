@@ -1,5 +1,5 @@
-local lspconfig = require('lspconfig')
-lspconfig.clangd.setup {
-  cmd = { "/usr/bin/clangd", "--background-index" },
-}
+-- local lspconfig = require('lspconfig')
+-- lspconfig.clangd.setup {
+--   cmd = { "/usr/bin/clangd", "--background-index" },
+-- }
 

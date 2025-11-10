@@ -1,3 +1,5 @@
+-- Set when in Putty
+vim.g.loaded_osc52 = 1
 
 -- Set <space> as the leader key
 -- See `:help mapleader`

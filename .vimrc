@@ -153,6 +153,8 @@ filetype plugin on
 " Enable relative numbers and colorscheme
 set relativenumber
 colorscheme industry
+highlight FzfBorder ctermfg=White ctermbg=White
+let g:fzf_colors = {'border': ['fg', 'FzfBorder']}
 
 " Enable status bar
  set statusline=

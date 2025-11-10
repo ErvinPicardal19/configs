@@ -34,7 +34,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Highlight the line where the cursor is on
-vim.o.cursorline = true
+-- vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 1
@@ -93,7 +93,7 @@ end, { desc = 'Print the git blame for the current line' })
 
 -- For example, to add the "nohlsearch" package to automatically turn off search highlighting after
 -- 'updatetime' and when going to insert mode
-vim.cmd('packadd! nohlsearch')
+-- vim.cmd('packadd! nohlsearch')
 
 -- <===== CUSTOMS =====>
 
@@ -114,6 +114,9 @@ vim.cmd('source ' .. vim.fn.stdpath('config') .. '/tabs.lua')
 
 -- Terminal
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/terminal.lua')
+
+-- Color
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/color.lua')
 
 -- Wrap
 vim.keymap.set({'v'}, '\"', 's""<Esc>P')

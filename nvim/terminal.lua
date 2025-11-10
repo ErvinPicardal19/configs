@@ -28,6 +28,8 @@ vim.keymap.set('t', '<C-\\>', '<C-\\><C-n><C-w>w', {desc = "Exit Terminal"})
 vim.api.nvim_create_autocmd({"TermOpen","TermEnter"}, {
 	pattern = "*",
 	callback = function ()
+		vim.opt_local.number = false
+		vim.opt_local.relativenumber = false
 		vim.cmd("startinsert")
 	end,
 })

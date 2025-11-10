@@ -1,1 +1,1 @@
-vim.cmd('colorscheme industry')
+vim.cmd('colorscheme github_dark_high_contrast')

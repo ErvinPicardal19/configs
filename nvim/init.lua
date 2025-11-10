@@ -97,8 +97,14 @@ end, { desc = 'Print the git blame for the current line' })
 
 -- <===== CUSTOMS =====>
 
+-- Turn on true-colour support
+vim.opt.termguicolors = true
+
 -- Make cursor only block shape
 vim.opt.guicursor = 'n-v-c-i:block'
+
+-- Plugins
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/plug.lua')
 
 -- Netrw
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/netrw.lua')
@@ -124,3 +130,5 @@ vim.keymap.set({'v'}, '{', 's{}<Esc>P')
 vim.keymap.set({'v'}, '[', 's[]<Esc>P')
 vim.keymap.set({'v'}, '(', 's()<Esc>P')
 
+-- LSP
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/lsp.lua')

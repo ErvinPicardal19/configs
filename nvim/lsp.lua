@@ -1,11 +1,19 @@
-vim.lsp.config("clangd", {
-    cmd = {"/usr/bin/clangd"},
-    flags = { debounce_text_changes = 150 },
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "c", "cpp" },
+    callback = function()
+      vim.lsp.start({
+        name = "clangd",
+        cmd = { "/usr/bin/clangd" },
+        root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+      })
+    end
 })
 
- vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp" },
-  callback = function()
-    vim.lsp.enable({ "clangd" })
-  end
+-- Enable virtual text diagnostics
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
 })
+

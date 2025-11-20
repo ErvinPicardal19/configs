@@ -104,6 +104,9 @@ vim.opt.termguicolors = true
 -- Make cursor only block shape
 vim.opt.guicursor = 'n-v-c-i:block'
 
+-- Enable Wrapping
+vim.o.wrap = true
+
 -- Plugins
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/plug.lua')
 

@@ -12,3 +12,5 @@ vim.cmd('set path+=**')
 vim.cmd('set wildmenu')
 
 vim.cmd('set omnifunc=ccomplete#Complete')
+
+vim.keymap.set({'i'}, '<C-n>', '<C-x><C-o>')

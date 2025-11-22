@@ -111,7 +111,8 @@ vim.o.wrap = true
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/plug.lua')
 
 -- Netrw
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/netrw.lua')
+-- vim.cmd('source ' .. vim.fn.stdpath('config') .. '/netrw.lua')
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/nvim_tree.lua')
 
 -- Autocomplete
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/autocomplete.lua')

@@ -98,13 +98,6 @@ end, { desc = 'Print the git blame for the current line' })
 
 -- <===== CUSTOMS =====>
 
--- Use tabs instead of spaces
-vim.opt.expandtab = false
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.smarttab = true
-
 -- Turn on true-colour support
 vim.opt.termguicolors = true
 

@@ -11,6 +11,6 @@ vim.cmd('set path+=**')
 -- Display all matching files when we tab complete
 vim.cmd('set wildmenu')
 
-vim.cmd('set omnifunc=ccomplete#Complete')
+vim.cmd('set omnifunc=v:lua.vim.lsp.omnifunc')
 
 vim.keymap.set({'i'}, '<C-n>', '<C-x><C-o>')

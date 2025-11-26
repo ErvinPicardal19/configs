@@ -33,6 +33,22 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python" },
+    callback = function()
+        -- Start the LSP server (clangd)
+        vim.lsp.start({
+            name = "pyright",
+            cmd = { "pyright-langserver", "--stdio" },
+            root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+        })
+
+        -- Run linting and then show diagnostics after buffer is saved
+        vim.cmd [[autocmd BufWritePost <buffer> lua require('lint').try_lint()]]
+        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+    end
+})
+
 -- Enable virtual text diagnostics for LSP
 vim.diagnostic.config({
     virtual_text = {

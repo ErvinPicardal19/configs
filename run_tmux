@@ -4,6 +4,11 @@ if [ -z "$(command -v tmux)" ]; then
     exit 1
 fi
 
-if [[ $TMUX == "" ]]; then
-    tmux attach -t default || tmux new-session -s default
+if [ "$(which tmux)" != "" ] && [ -z "$TMUX" ] && [ -t 1 ]; then
+
+    # Default Session
+    tmux has-session -t default 2>/dev/null || tmux new-session -d -s default
+
+    tmux attach -t default
+
 fi

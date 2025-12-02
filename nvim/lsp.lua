@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd("FileType", {
         })
 
         -- Run linting and then show diagnostics after buffer is saved
-        vim.cmd [[autocmd BufWritePost <buffer> lua require('lint').try_lint()]]
         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
     end
 })
@@ -44,7 +43,28 @@ vim.api.nvim_create_autocmd("FileType", {
         })
 
         -- Run linting and then show diagnostics after buffer is saved
-        vim.cmd [[autocmd BufWritePost <buffer> lua require('lint').try_lint()]]
+        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "sh" },
+    callback = function()
+        -- Start the LSP server (clangd)
+        -- Start bash-language-server manually using vim.lsp.start()
+        vim.lsp.start({
+            name = "bashls",
+            cmd = { "bash-language-server", "start" },
+            root_dir = vim.fn.getcwd(),  -- or use your own root finder
+            filetypes = { "sh", "bash" },
+            settings = {
+                bashIde = {
+                    globPattern = "*@(.sh|.inc|.bash|.command)"
+                }
+            }
+        })
+
+        -- Run linting and then show diagnostics after buffer is saved
         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
     end
 })

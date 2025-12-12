@@ -69,6 +69,20 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "asm" },
+    callback = function()
+        vim.lsp.start({
+            name = "asm-lsp",
+            cmd = { "/home/ervinpicardal/.cargo/bin/asm-lsp" },
+            root_dir = vim.fs.root(0, { ".asm-lsp.toml" }),
+        })
+
+        -- Run linting and then show diagnostics after buffer is saved
+        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+    end
+})
+
 -- Enable virtual text diagnostics for LSP
 vim.diagnostic.config({
     virtual_text = {

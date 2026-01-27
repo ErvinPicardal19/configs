@@ -83,6 +83,20 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "make","Makefile" },
+    callback = function()
+        vim.lsp.start({
+            name = "autotools-language-server",
+            cmd = { "/home/ervinpicardal/.local/bin/autotools-language-server" },
+            root_dir = vim.fs.root(0, { ".git", "Makefile" }),
+        })
+
+        -- Run linting and then show diagnostics after buffer is saved
+        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+    end
+})
+
 -- Enable virtual text diagnostics for LSP
 vim.diagnostic.config({
     virtual_text = {

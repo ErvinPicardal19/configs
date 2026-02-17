@@ -20,5 +20,5 @@ ln -sf "$(pwd)/.tmux.conf" ~/.tmux.conf
 ln -sf "$(pwd)/.vimrc" ~/.vimrc
 if [ $NVIM -eq 1 ]; then
     ln -sf "$(pwd)/nvim/" ~/.config/
-    ln -sf "$(pwd)/plugin/nvim" ~/.local/share/
+    #ln -sf "$(pwd)/plugin/nvim" ~/.local/share/
 fi

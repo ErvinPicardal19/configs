@@ -121,7 +121,7 @@ vim.cmd('source ' .. vim.fn.stdpath('config') .. '/autocomplete.lua')
 vim.keymap.set({ 'n' }, '<leader>r', ':source ' .. vim.fn.stdpath('config') .. '/init.lua<CR>')
 
 -- Tab navigation
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/tabs.lua')
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vim_cmd.lua')
 
 -- Terminal
 vim.cmd('source ' .. vim.fn.stdpath('config') .. '/terminal.lua')

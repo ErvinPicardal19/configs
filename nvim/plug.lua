@@ -3,6 +3,7 @@ vim.call('plug#begin', vim.fn.stdpath('data') .. '/plugged')
 
 Plug('projekt0n/github-nvim-theme')
 Plug('junegunn/fzf', { ['do'] = vim.fn['fzf#install'] })
+Plug('junegunn/fzf.vim')
 -- Plug('mfussenegger/nvim-lint')
 Plug('nvim-tree/nvim-web-devicons')
 Plug('nvim-tree/nvim-tree.lua')

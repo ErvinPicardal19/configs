@@ -12,6 +12,12 @@ vim.keymap.set({ 'n' }, '<leader>7', '7gt')
 vim.keymap.set({ 'n' }, '<leader>8', '8gt')
 vim.keymap.set({ 'n' }, '<leader>9', '9gt')
 
+vim.keymap.set({ 'n' }, '<leader>f', ':BLines<CR>')
+vim.keymap.set({ 'n' }, '<leader>r', ':Rg<CR>')
+vim.keymap.set({ 'n' }, '<leader>F', ':Files<CR>')
+vim.keymap.set({ 'n' }, '<leader>g', ':BCommits<CR>')
+vim.keymap.set({ 'n' }, '<leader>G', ':Commits<CR>')
+
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")

@@ -29,6 +29,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
         -- Run linting and then show diagnostics after buffer is saved
         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+        vim.keymap.set({ 'n' }, 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
     end
 })
 
@@ -109,4 +110,3 @@ vim.diagnostic.config({
 
 -- Set text wrapping to 80 characters
 vim.o.textwidth = 80
-

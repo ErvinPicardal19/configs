@@ -18,6 +18,8 @@ vim.keymap.set({ 'n' }, '<leader>F', ':Files<CR>')
 vim.keymap.set({ 'n' }, '<leader>g', ':BCommits<CR>')
 vim.keymap.set({ 'n' }, '<leader>G', ':Commits<CR>')
 
+vim.keymap.set({ 'x' }, '<C-r>', 'y:s/<C-r>"//g<Left><Left>')
+
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")

@@ -124,6 +124,8 @@ let g:fzf_vim = {}
 
 " ----------------------- BASIC NATIVE VIM SETUP -----------------------
 
+autocmd VimEnter * if &diff | set wrap linebreak breakindent | endif
+
 " Allow backspace
 set backspace=indent,eol,start
 

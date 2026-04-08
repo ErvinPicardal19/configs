@@ -24,6 +24,18 @@ vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   callback = function()
+--     if vim.opt.diff:get() then
+--         vim.cmd("windo set wrap linebreak breakindent")
+--     end
+--   end
+-- })
+-- 
+-- vim.opt.diffopt:append("vertical")
+-- vim.opt.diffopt:append("iwhite")
+-- vim.opt.diffopt:append("algorithm:patience")
+
 -- Convert tabs to spaces
 _G.tabs_default="expandtab"
 vim.cmd("set " .. _G.tabs_default)

@@ -37,7 +37,7 @@ vim.cmd("set shiftwidth=4")
 -- vim.opt.diffopt:append("algorithm:patience")
 
 -- Convert tabs to spaces
-_G.tabs_default="expandtab"
+_G.tabs_default="noexpandtab"
 vim.cmd("set " .. _G.tabs_default)
 
 vim.keymap.set({ 'n' }, '<leader>t', function()

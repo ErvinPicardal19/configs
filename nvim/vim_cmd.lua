@@ -20,6 +20,10 @@ vim.keymap.set({ 'n' }, '<leader>G', ':Commits<CR>')
 
 vim.keymap.set({ 'x' }, '<C-r>', 'y:s/<C-r>"//g<Left><Left>')
 
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gr", vim.lsp.buf.references)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")

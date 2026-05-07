@@ -42,7 +42,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 Plug 'dense-analysis/ale'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'vim-latex/vim-latex'
-Plug 'tpope/vim-sleuth'
 Plug 'github/copilot.vim'
 Plug 'nvim-lua/plenary.nvim'
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
@@ -74,8 +73,8 @@ let g:ale_pattern_options = {
 
 " Enable specific linters (optional)
 let g:ale_linters = {
-\   'c': ['gcc'],
-\   'cpp': ['clang', 'clangtidy', 'gcc'],
+\   'c': ['clangd', 'gcc'],
+\   'cpp': ['clangd', 'clangtidy', 'gcc'],
 \}
 
 " Function to build recursive -I flags from a given root directory
@@ -139,8 +138,8 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 " Convert tabs to spaces
-set expandtab
-" set noexpandtab
+" set expandtab
+set noexpandtab
 " set autoindent
 " set fileformat=unix
 
@@ -311,6 +310,5 @@ nnoremap <leader>G :Commits<CR>
 " inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-x><C-o>'
 " inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-x><C-o>'
 
-" Jumps
-" nnoremap <leader>] :tnext<CR>
-" nnoremap <leader>t :tprev<CR>
+" ALE Jumps
+nnoremap <C-]> :ALEGoToDefinition<CR>

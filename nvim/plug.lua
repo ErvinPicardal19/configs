@@ -7,6 +7,7 @@ Plug('junegunn/fzf.vim')
 -- Plug('mfussenegger/nvim-lint')
 Plug('nvim-tree/nvim-web-devicons')
 Plug('nvim-tree/nvim-tree.lua')
+Plug('neovim/nvim-lspconfig')
 -- add more Plug('author/repo', {...}) lines as needed
 
 vim.call('plug#end')

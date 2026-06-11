@@ -17,6 +17,25 @@ function show_current_line_diagnostics()
 end
 
 -- LSP setup for clangd
+ vim.api.nvim_create_autocmd("FileType", {
+     pattern = { "c", "cpp" },
+     callback = function()
+         -- Start the LSP server (clangd)
+         vim.lsp.start({
+             name = "clangd",
+             cmd = {
+                 "/usr/bin/clangd",
+             },
+             root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+         })
+ 
+         -- Run linting and then show diagnostics after buffer is saved
+         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+         vim.keymap.set({ 'n' }, 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+     end
+ })
+
+-- For ESP32-IDF
 -- vim.api.nvim_create_autocmd("FileType", {
 --     pattern = { "c", "cpp" },
 --     callback = function()
@@ -24,9 +43,15 @@ end
 --         vim.lsp.start({
 --             name = "clangd",
 --             cmd = {
---                 "/usr/bin/clangd",
+--                 --"/usr/bin/clangd",
+--                 "clangd",
+--                 "--background-index",
+--                 "--clang-tidy",
+--                 "--completion-style=detailed",
+--                 "--header-insertion=never",
+--                 "--query-driver=/home/ervinpicardal/.espressif/tools/**/bin/*",
 --             },
---             root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+--             root_dir = vim.loop.cwd(),
 --         })
 -- 
 --         -- Run linting and then show diagnostics after buffer is saved
@@ -34,31 +59,6 @@ end
 --         vim.keymap.set({ 'n' }, 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
 --     end
 -- })
-
--- For ESP32-IDF
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "c", "cpp" },
-    callback = function()
-        -- Start the LSP server (clangd)
-        vim.lsp.start({
-            name = "clangd",
-            cmd = {
-                --"/usr/bin/clangd",
-                "clangd",
-                "--background-index",
-                "--clang-tidy",
-                "--completion-style=detailed",
-                "--header-insertion=never",
-                "--query-driver=/home/ervinpicardal/.espressif/tools/**/bin/*",
-            },
-            root_dir = vim.loop.cwd(),
-        })
-
-        -- Run linting and then show diagnostics after buffer is saved
-        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
-        vim.keymap.set({ 'n' }, 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
-    end
-})
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python" },

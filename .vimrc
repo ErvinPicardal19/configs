@@ -311,4 +311,4 @@ nnoremap <leader>G :Commits<CR>
 " inoremap <expr> <C-p> pumvisible() ? '<C-p>' : '<C-x><C-o>'
 
 " ALE Jumps
-nnoremap <C-]> :ALEGoToDefinition<CR>
+" nnoremap <C-]> :ALEGoToDefinition<CR>

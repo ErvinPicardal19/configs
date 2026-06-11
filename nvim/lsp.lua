@@ -17,14 +17,41 @@ function show_current_line_diagnostics()
 end
 
 -- LSP setup for clangd
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "c", "cpp" },
+--     callback = function()
+--         -- Start the LSP server (clangd)
+--         vim.lsp.start({
+--             name = "clangd",
+--             cmd = {
+--                 "/usr/bin/clangd",
+--             },
+--             root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+--         })
+-- 
+--         -- Run linting and then show diagnostics after buffer is saved
+--         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+--         vim.keymap.set({ 'n' }, 'K', ':lua vim.lsp.buf.hover()<CR>', {noremap = true, silent = true})
+--     end
+-- })
+
+-- For ESP32-IDF
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp" },
     callback = function()
         -- Start the LSP server (clangd)
         vim.lsp.start({
             name = "clangd",
-            cmd = { "/usr/bin/clangd" },
-            root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+            cmd = {
+                --"/usr/bin/clangd",
+                "clangd",
+                "--background-index",
+                "--clang-tidy",
+                "--completion-style=detailed",
+                "--header-insertion=never",
+                "--query-driver=/home/ervinpicardal/.espressif/tools/**/bin/*",
+            },
+            root_dir = vim.loop.cwd(),
         })
 
         -- Run linting and then show diagnostics after buffer is saved
@@ -48,27 +75,27 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "sh" },
-    callback = function()
-        -- Start the LSP server (clangd)
-        -- Start bash-language-server manually using vim.lsp.start()
-        vim.lsp.start({
-            name = "bashls",
-            cmd = { "bash-language-server", "start" },
-            root_dir = vim.fn.getcwd(),  -- or use your own root finder
-            filetypes = { "sh", "bash" },
-            settings = {
-                bashIde = {
-                    globPattern = "*@(.sh|.inc|.bash|.command)"
-                }
-            }
-        })
-
-        -- Run linting and then show diagnostics after buffer is saved
-        vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
-    end
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--     pattern = { "sh" },
+--     callback = function()
+--         -- Start the LSP server (clangd)
+--         -- Start bash-language-server manually using vim.lsp.start()
+--         vim.lsp.start({
+--             name = "bashls",
+--             cmd = { "bash-language-server", "start" },
+--             root_dir = vim.fn.getcwd(),  -- or use your own root finder
+--             filetypes = { "sh", "bash" },
+--             settings = {
+--                 bashIde = {
+--                     globPattern = "*@(.sh|.inc|.bash|.command)"
+--                 }
+--             }
+--         })
+-- 
+--         -- Run linting and then show diagnostics after buffer is saved
+--         vim.cmd [[autocmd CursorMoved <buffer> lua show_current_line_diagnostics()]]
+--     end
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "asm" },

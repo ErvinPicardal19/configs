@@ -53,3 +53,14 @@ vim.keymap.set({ 'n' }, '<leader>t', function()
 		vim.cmd("set " .. _G.tabs_default)
 	end
 end)
+
+vim.keymap.set("n", "<leader><tab>", function()
+  for _, win in ipairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd("lclose")
+      return
+    end
+  end
+
+  vim.lsp.buf.document_symbol()
+end, { desc = "Toggle document symbols" })

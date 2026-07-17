@@ -64,3 +64,18 @@ vim.keymap.set("n", "<leader><tab>", function()
 
   vim.lsp.buf.document_symbol()
 end, { desc = "Toggle document symbols" })
+
+vim.keymap.set("n", "<leader>d", function()
+  vim.ui.input({ prompt = "Workspace symbol: " }, function(input)
+    if not input or input == "" then
+      return
+    end
+
+    vim.lsp.buf.workspace_symbol(input)
+
+    vim.schedule(function()
+      local height = math.max(5, math.floor(vim.o.lines * 0.15))
+      vim.cmd("copen " .. height)
+    end)
+  end)
+end, { desc = "Workspace symbol search" })

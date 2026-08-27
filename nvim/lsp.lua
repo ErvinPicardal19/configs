@@ -24,9 +24,9 @@ end
          vim.lsp.start({
              name = "clangd",
              cmd = {
-                 "/usr/bin/clangd",
-             },
-             root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }),
+                'clangd'
+            },
+             root_dir = vim.fs.root(0, { "compile_commands.json", ".git" }) or vim.loop.cwd(),
          })
  
          -- Run linting and then show diagnostics after buffer is saved

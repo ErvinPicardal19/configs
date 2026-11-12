@@ -23,6 +23,9 @@ vim.keymap.set({ 'x' }, '<C-r>', 'y:s/<C-r>"//g<Left><Left>')
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gr", vim.lsp.buf.references)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("i", "<C-k>", function()
+	vim.lsp.buf.signature_help()
+end)
 
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
@@ -41,7 +44,7 @@ vim.cmd("set shiftwidth=4")
 -- vim.opt.diffopt:append("algorithm:patience")
 
 -- Convert tabs to spaces
-_G.tabs_default="noexpandtab"
+_G.tabs_default="expandtab"
 vim.cmd("set " .. _G.tabs_default)
 
 vim.keymap.set({ 'n' }, '<leader>t', function()

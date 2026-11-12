@@ -20,7 +20,7 @@ end
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp" },
     callback = function()
-        local clangd = "/usr/bin/clangd-15"
+        local clangd = "clangd"
 
         -- ESP-IDF environment detected
         if vim.env.IDF_PATH then
